@@ -14,9 +14,9 @@ const NoteItem = ({ note }) => {
     <Link
       to={`/Editnote/${note.id}`}
       className="note"
-      style={{ backgroundColor: randomColor }}>
+      style={{ backgroundColor: note.color }}>
       <h4>
-        {note.title.length > 40 ? note.title.substr(0, 20) + "..." : note.title}
+        {note.title.length > 20 ? note.title.substr(0, 20) + "..." : note.title}
       </h4>
       <p>{note.date}</p>
     </Link>

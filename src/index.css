@@ -1,13 +1,328 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --color-bg-dark: #3a3a3a;
+  --color-bg-black: #111111;
+  --color-white: #fefefe;
+  --color-primary: #7634d8;
+  --color-danger: rgb(249, 84, 84);
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  display: grid;
+  place-items: center;
+  color: var(--color-white);
+  background: #ccc;
+  line-height: 1.5;
+}
+
+.btn {
+  width: 50px;
+  height: 44px;
+  /* padding: 0.5rem; */
+  background: var(--color-bg-dark);
+  border-radius: 0.8rem;
+  padding: 0.6rem;
+  font-size: 1.6rem;
+  color: var(--color-white);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
+  transition: all 300ms ease;
+}
+
+.btn.lg {
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.4);
+}
+
+.btn.danger {
+  background: var(--color-danger);
+}
+
+.btn.primary {
+  background: var(--color-primary);
+}
+
+.btn:hover {
+  cursor: pointer;
+  box-shadow: none;
+}
+
+#app {
+  background: var(--color-bg-black);
+  height: 48rem;
+  width: 24rem;
+  padding: 2rem 1.6rem;
+  overflow-y: scroll;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+h2,
+h4 {
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+/* NOTES PAGE */
+.notes__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 1rem;
+  background: var(--color-bg-black);
+  z-index: 9;
+}
+
+.notes__header input {
+  padding: 0.7rem 0.5rem;
+  background: transparent;
+  border: 1px solid var(--color-bg-dark);
+  border-radius: 0.6rem;
+  color: var(--color-white);
+  font-size: 1.1rem;
+  width: 100%;
+  margin-right: 1.5rem;
+}
+
+.notes__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.empty__notes {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.note {
+  background: var(--color-primary);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  color: var(--color-white);
+}
+
+.note:hover {
+  opacity: 0.9;
+}
+
+.note:nth-child(3) {
+  grid-column: 1/3;
+}
+
+.note:nth-child(4) {
+  grid-row: 3/5;
+}
+
+.note:nth-child(7) {
+  grid-column: 1/3;
+}
+.modal-overlay {
+  position: fixed;
+  width: 250px;
+  height: 200px;
+  top: 40%;
+  bottom: 60%;
+  left: 20%;
+  right: 80%;
+  /* background-color: #111111a6; */
+  /* padding: 20px; */
+}
+.modal-content {
+  position: fixed;
+  width: 230px;
+  height: 160px;
+  border-radius: 10px;
+  background-color: #111111f3;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-content {
+  animation: modalAnimation 0.5s forwards;
+}
+.not__notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 350px;
+  height: 350px;
+}
+.img__not_found {
+  align-self: center;
+  width: 200px;
+  height: 150px;
+  /* background-color: black; */
+}
+.empty__notes {
+  top: 60%;
+}
+
+.note p {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.btn.add__btn {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  background: rgba(37, 37, 37, 1);
+  box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
+}
+/* .add__btn {
+  width: 70px;
+  height: 70px;
+  top: 777px;
+  left: 309px;
+} */
+/* CREATE NOTE & EDIT NOTE PAGE */
+.create-note__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-note__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.modal {
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  width: 230px;
+  height: 160px;
+  border-radius: 10px;
+  background-color: #111111f3;
+  padding: 20px;
+  display: flex;
+  text-align: center;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.btn__delete__modal {
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.cancel__btn {
+  width: 112px;
+  height: 39px;
+  border-radius: 5px;
+  background-color: red;
+  cursor: pointer;
+}
+.danger__confirm {
+  cursor: pointer;
+  width: 112px;
+  height: 39px;
+  border-radius: 5px;
+  background-color: green;
+}
+.modal-content {
+  position: fixed;
+  width: 230px;
+  height: 160px;
+  border-radius: 10px;
+  background-color: #111111f3;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.create-note__form input,
+.create-note__form textarea {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border-radius: 0.2rem;
+  font-size: 1.1rem;
+  color: var(--color-white);
+}
+
+.create-note__form input {
+  font-size: 2rem;
+}
+
+/* MEDIA QUERIES FOR PHONES */
+@media screen and (max-width: 600px) {
+  #app {
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .notes__header {
+    width: 100%;
+    padding: 2rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .notes__container {
+    margin-top: 5rem;
+    gap: 1rem;
+  }
+  .btn.info__btn {
+    width: 50px;
+    height: 42px;
+    padding: 0.5rem;
+    margin-left: 5px;
+  }
+
+  .btn.add__btn {
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    bottom: 6%;
+    right: 2rem;
+    border-radius: 50%;
+  }
 }
